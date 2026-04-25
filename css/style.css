@@ -1,0 +1,22 @@
+h1 {
+    color: white;
+    background: linear-gradient(to bottom right, blue, red, green);
+    width: fit-content;
+    block-size: fit-content;
+    margin: auto;
+}
+
+.fontsize-chotto-ookii {
+    font-size: 130%;
+    font-weight: bold;
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+p {
+    margin: 1.6em 20px;
+}
