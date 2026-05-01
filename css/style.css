@@ -1,3 +1,4 @@
+/*タイトル*/
 h1 {
     color: white;
     background: linear-gradient(to bottom right, blue, red, green);
@@ -6,10 +7,12 @@ h1 {
     margin: auto;
 }
 
+
 .fontsize-chotto-ookii {
     font-size: 130%;
     font-weight: bold;
     font-family: "WDXL Lubrifont JP N", sans-serif;
+    margin: 0.5em 20px;
 }
 
 img {
@@ -17,6 +20,60 @@ img {
     height: auto;
 }
 
+
+/*ｐのやつ、行間*/
 p {
     margin: 1.6em 20px;
+}
+
+
+/*チャッピーからパクったシンプルなボタン*/
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(164, 221, 240);
+    color: rgb(28, 15, 22);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+
+/*ぽいひくボタン本体*/
+.poipiku-button {
+    /*均等に並ぶ神らしい*/
+    flex: 1;
+    /*デカくなりすぎ防止*/
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px;
+}
+
+
+
+/*ボタンを横ならべにする*/
+.botan-narabe {
+    display: flex;
+    gap: 10px;
+}
+
+
+.ichigo-mini {
+    /*ボタンの幅に合わせる*/
+    width: 100%;
+    height: auto;
 }
