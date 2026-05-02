@@ -5,8 +5,53 @@ h1 {
     width: fit-content;
     block-size: fit-content;
     margin: auto;
+    text-align: center;
 }
 
+
+.nav-uenoyatu {
+    background-color: rgb(180, 212, 240);
+    padding: 10px;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+
+
+.sumaho {
+    display: none;
+}
+
+/* 小さい画面のときだけ改行を有効にする */
+@media (max-width: 600px) {
+    .sumaho {
+        display: inline;
+    }
+}
+
+
+.fontsize-motto-ookii {
+    padding: 10px 20px;
+    border: 3px solid rgb(197, 125, 0);
+    border-radius: 8px;
+    background-color: rgb(252, 234, 176);
+    color: rgb(28, 15, 22);
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+.fontsize-chotto-ookii2 {
+    font-size: 130%;
+    font-weight: bold;
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    margin: 1em 0;
+}
 
 .fontsize-chotto-ookii {
     font-size: 130%;
@@ -14,6 +59,7 @@ h1 {
     font-family: "WDXL Lubrifont JP N", sans-serif;
     margin: 0.5em 20px;
 }
+
 
 img {
     width: 100%;
@@ -28,7 +74,7 @@ p {
 
 
 /*チャッピーからパクったシンプルなボタン*/
-button {
+.button-ao {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
