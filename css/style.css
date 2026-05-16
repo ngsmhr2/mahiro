@@ -150,3 +150,10 @@ button:active {
     justify-content: center;
     align-items: center;
 }
+
+
+
+/*ToDoリスト　取り消し線*/
+.completed {
+    text-decoration: line-through;
+}

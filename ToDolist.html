@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/ToDolist.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+JP+N&display=swap" rel="stylesheet">
+    <title>ToDoリスト</title>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>まひのHTML練習<br class="sumaho">自己紹介ページ</h1>
+    </header>
+
+    <nav class="nav-uenoyatu">
+        <button>
+            <a href="index.html">ホーム</a>
+        </button>
+
+        <button>
+            <a href="works.html">麻痺がつくったもの</a>
+        </button>
+
+        <button>
+            <a href="like.html">すきなもの</a>
+        </button>
+
+        <button>
+            <a href="tesuto.html">まひSNS</a>
+        </button>
+
+        <button>
+            <a href="omikuji.html">おみくじ</a>
+        </button>
+
+        <button>
+            <a href="ToDolist.html">ToDoリスト</a>
+        </button>
+
+    </nav>
+
+
+
+    <ul id="list">
+    </ul>
+
+
+    <p>
+        ↓ここにToDoriリストを入力↓
+    </p>
+
+    <form id="form">
+        <input id="text">
+        <button>送信</button>
+    </form>
+
+    <button id="deleteButton">
+        チェック済みを削除
+    </button>
+
+
+
+
+
+
+
+    <p>
+        <label for="peas">エンドウ豆が好きです</label>
+        <input type="checkbox" name="peas" id="peas" />
+    </p>
+
+    <p>
+        <a href="terms-and-conditions.html">利用規約と利用条件を読む</a>
+    </p>
+    <label for="tac">
+        <input id="tac" type="checkbox" name="terms-and-conditions" />
+        利用規約と利用条件に同意します。
+    </label>
+
+
+    <label for="username">クリックすると入力フィールドにフォーカスします</label>
+    <input type="text" id="username" />
+
+
+
+</body>
+
+</html>
