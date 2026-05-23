@@ -11,6 +11,9 @@ const list = document.querySelector("#list");
 const deleteButton = document.querySelector("#deleteButton");
 
 
+const savedTodo = localStorage.getItem("todo");
+
+
 /* ToDo追加 */
 form.addEventListener("submit", (event) => {
 
@@ -20,13 +23,19 @@ form.addEventListener("submit", (event) => {
 
     const li = document.createElement("li");
 
+
+
     /* チェックボックス */
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
     /* 文字 */
+
     const span = document.createElement("span");
     span.textContent = input.value;
+
+
+
 
     /* チェック時 */
     checkbox.addEventListener("change", () => {
@@ -43,24 +52,61 @@ form.addEventListener("submit", (event) => {
 
     input.value = '';
 
-});
 
 
-/* チェック済み削除 */
-deleteButton.addEventListener("click", () => {
 
-    const items = document.querySelectorAll("li");
+    /* チェック済み削除 */
+    deleteButton.addEventListener("click", () => {
 
-    items.forEach((item) => {
+        const items = document.querySelectorAll("li");
 
-        const checkbox = item.querySelector("input");
+        items.forEach((item) => {
 
-        if (checkbox.checked) {
+            const checkbox = item.querySelector("input");
 
-            item.remove();
+            if (checkbox.checked) {
+
+                item.remove();
+
+            }
+
+        });
+
+    });
+
+
+
+
+    //ローカルストレージ
+
+    form.addEventListener("click", () => {
+
+        const hozonn = document.querySelectorAll("li");
+
+        hozonn.forEach((item) => {
+
+            localStorage.setItem("hozonn", JSON.stringify(hozonn));
+
+
+
+
 
         }
 
     });
+
+});
+
+
+/*
+localStorage.setItem("todo", input.value);
+
+const savedTodo = localStorage.getItem("todo");
+*/
+
+
+
+
+
 
 });
