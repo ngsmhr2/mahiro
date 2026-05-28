@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="notes.html">学習メモ</a>
+            <a href="omikuji.html">おみくじ</a>
+            <a href="todo.html">Todo</a>
+        </nav>
+    </header>
+
+    <h1>Todo</h1>
+    <p>やることを書きとめておくページ。ブラウザを閉じても消えません。</p>
+
+    <input id="input" type="text" placeholder="やることを入力">
+    <button id="add">追加</button>
+
+    <ul id="list"></ul>
+
+    <script>
+
+        const input = document.getElementById('input');
+        const addBtn = document.getElementById('add');
+        const list = document.getElementById('list');
+
+        function appendTodo(text) {
+            const li = document.createElement('li');
+            const span = document.createElement('span');
+            span.textContent = text;
+            const del = document.createElement('button');
+            del.textContent = '×';
+            del.addEventListener('click', () => {
+                li.remove();
+                save();
+            });
+            li.appendChild(span);
+            li.appendChild(del);
+            list.appendChild(li);
+        }
+
+        function save() {
+            const items = [];
+            for (const li of list.children) {
+                const span = li.querySelector('span');
+                items.push(span.textContent);
+            }
+            localStorage.setItem('todos', JSON.stringify(items));
+        }
+
+        addBtn.addEventListener('click', () => {
+            const text = input.value;
+            if (text === '') return;
+            appendTodo(text);
+            save();
+            input.value = '';
+        });
+
+        const saved = localStorage.getItem('todos');
+        if (saved) {
+            const items = JSON.parse(saved);
+            for (const text of items) {
+                appendTodo(text);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

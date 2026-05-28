@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>おみくじ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="notes.html">学習メモ</a>
+            <a href="omikuji.html">おみくじ</a>
+            <a href="todo.html">Todo</a>
+        </nav>
+    </header>
+
+    <h1>おみくじ</h1>
+    <p>ボタンを押すと、今日のあなたの運勢が出ます。</p>
+
+    <button id="draw">おみくじを引く</button>
+    <p id="result">ここに結果が出ます</p>
+
+    <script>
+        const button = document.getElementById('draw');
+        const result = document.getElementById('result');
+        const fortunes = ['大吉', '中吉', '小吉', '末吉', '凶'];
+
+        button.addEventListener('click', () => {
+            const index = Math.floor(Math.random() * fortunes.length);
+            result.textContent = fortunes[index];
+        });
+    </script>
+
+</body>
+
+</html>
