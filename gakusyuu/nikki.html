@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
     <button id="touroku">内容登録</button>
 
     <!--日記の本文-->
-    <div id="honbun"></div>
+    <ul id="honbun"></ul>
 
 
 
@@ -42,23 +42,66 @@
         /*あぺんどだいありーって関数つくった*/
         function appenddiary(text) {
 
-            /*ここに日付勝手に読み込んでだしてくれるのいれたい*/
+            const li = document.createElement('li')
 
+
+
+
+            /*ここに日付勝手に読み込んでだしてくれるのいれたい*/
+            const today = new Date();
+
+            const hizuke =
+                today.getFullYear() + '年' +
+                (today.getMonth() + 1) + '月' +
+                today.getDate() + '日';
+
+            const div = document.createElement('div')
+            div.textContent = hizuke;
+
+
+
+
+            /*spanで定数はspan要素をつくる*/
             const span = document.createElement('span')
+            /*spanの中にテキストコメントでtextの中身をいれる*/
             span.textContent = text;
 
+            /*delで定数はbutton要素をつくる*/
             const del = document.createElement('button')
+            /*delの中にテキストコメントで削除をいれる*/
             del.textContent = '削除';
+            /*delがクリックされたとき*/
             del.addEventListener('click', () => {
-                span.remove();
+                /*spanを消す*/
+                li.remove();
+                /*その状態を保存*/
                 save();
 
             });
 
-            span.appendChild('del')
-            honbun.appendChild('span')
+
+            span.appendChild(div)
+
+            /*<li>
+                <span>日記内容<span>
+                    <li>*/
+            li.appendChild(span)
+            /*<li>
+                <span>日記内容<span>
+                    <button>削除<button>
+                        <li>*/
+            li.appendChild(del)
+            /*<ul>
+                <li>
+                    <span>日記内容<span>
+                        <button>削除<button>
+                            <li>
+                                <ul>*/
+            honbun.appendChild(li)
+
 
         }
+
 
 
         /*saveって関数つくった*/
@@ -66,22 +109,26 @@
             /*diarysって名前の何にもはいってない配列つくった*/
             const diarys = [];
 
-            /*honbunのなかのspanをいっこずつに
+            /*配列に追加*/
+            /*honbunのなかのliをいっこずつ確認
             ここ自信なし*/
-            for (const span of honbun.children) {
-                const span = honbun.querySelector('span')
+            for (const li of honbun.children) {
+                /*liのなかのspanをさがす*/
+                const span = li.querySelector('span')
+                /*配列に追加*/
                 diarys.push(span.textContent);
             }
             localStorage.setItem('nikkinaiyou', JSON.stringify(diarys));
         }
 
 
+
         tourokuBtn.addEventListener('click', () => {
             const nikki = diary.value;
             /*もしdiaryの中身が空だったら*/
-            if (diary === '') return;
+            if (nikki === '') return;
             /*この関数を実行！*/
-            appenddiary(text);
+            appenddiary(nikki);
             /*この関数を実行！*/
             save();
             /*最後に入力欄を空に*/
