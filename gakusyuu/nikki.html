@@ -39,27 +39,12 @@
         const tourokuBtn = document.getElementById('touroku')
         const honbun = document.getElementById('honbun')
 
+
         /*あぺんどだいありーって関数つくった*/
-        function appenddiary(text) {
+        function appenddiary(text, div) {
+
 
             const li = document.createElement('li')
-
-
-
-
-            /*ここに日付勝手に読み込んでだしてくれるのいれたい*/
-            const today = new Date();
-
-            const hizuke =
-                today.getFullYear() + '年' +
-                (today.getMonth() + 1) + '月' +
-                today.getDate() + '日';
-
-            const div = document.createElement('div')
-            div.textContent = hizuke;
-
-
-
 
             /*spanで定数はspan要素をつくる*/
             const span = document.createElement('span')
@@ -80,12 +65,12 @@
             });
 
 
-            span.appendChild(div)
+            div.appendChild(span)
 
             /*<li>
                 <span>日記内容<span>
                     <li>*/
-            li.appendChild(span)
+            li.appendChild(div)
             /*<li>
                 <span>日記内容<span>
                     <button>削除<button>
@@ -114,26 +99,42 @@
             ここ自信なし*/
             for (const li of honbun.children) {
                 /*liのなかのspanをさがす*/
-                const span = li.querySelector('span')
+                const sagasu = li.querySelector('div')
                 /*配列に追加*/
-                diarys.push(span.textContent);
+                diarys.push(div.textContent);
             }
             localStorage.setItem('nikkinaiyou', JSON.stringify(diarys));
         }
 
 
 
+        /*ボタンを押す*/
         tourokuBtn.addEventListener('click', () => {
+
+
+            /*ここに日付勝手に読み込んでだしてくれるのいれたい*/
+            const today = new Date();
+
+            const hizuke =
+                today.getFullYear() + '年' +
+                (today.getMonth() + 1) + '月' +
+                today.getDate() + '日';
+
+            const div = document.createElement('div')
+            div.textContent = hizuke;
+
+
             const nikki = diary.value;
             /*もしdiaryの中身が空だったら*/
             if (nikki === '') return;
             /*この関数を実行！*/
-            appenddiary(nikki);
+            appenddiary(nikki, div);
             /*この関数を実行！*/
             save();
             /*最後に入力欄を空に*/
             diary.value = '';
         });
+
 
 
         /*日記読み込み*/
