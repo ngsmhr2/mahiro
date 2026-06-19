@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ひとこと日記</title>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a href="index.html">ホーム</a>
+                <a href="notes.html">学習メモ</a>
+                <a href="omikuji.html">おみくじ</a>
+                <a href="todo.html">Todo</a>
+            </nav>
+        </header>
+
+        <h1>ひとこと日記</h1>
+        <p>理論上は日記を書いて保存できるはず</p>
+
+        <!-- 日記入力欄 -->
+        <input id="content-input" type="text" placeholder="日記の内容を入力">
+        <!-- ボタン -->
+        <button id="register-button">登録</button>
+        <!-- 日記の本文 -->
+        <ul id="diaries"></ul>
+
+        <style>
+            #diaries {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .diary {
+                border: 1px solid #ccc;
+                padding: 10px;
+
+                & .headline {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+
+                    & .date {
+                        font-weight: bold;
+                    }
+                }
+            }
+        </style>
+
+        <script>
+            const elements = {
+                contentInput: document.getElementById('content-input'),
+                registerButton: document.getElementById('register-button'),
+                diaries: document.getElementById('diaries'),
+            };
+
+            function generateCurrentDate() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                return `${year}/${month}/${day}`;
+            }
+
+            function createDiary(date, content) {
+                return { date, content };
+            }
+
+            function createDiaryElement(diary) {
+                const newElements = {
+                    container: document.createElement('li'),
+                    headline: document.createElement('div'),
+                    date: document.createElement('span'),
+                    deleteButton: document.createElement('button'),
+                    content: document.createElement('div'),
+                };
+                newElements.container.classList.add('diary');
+                newElements.headline.classList.add('headline');
+                newElements.date.classList.add('date');
+                newElements.deleteButton.classList.add('delete-button');
+                newElements.content.classList.add('content');
+
+                // 日付と内容の要素のテキストを更新する
+                newElements.date.textContent = diary.date;
+                newElements.content.textContent = diary.content;
+
+                // 削除ボタンの設定
+                newElements.deleteButton.textContent = '削除';
+                newElements.deleteButton.addEventListener('click', () => {
+                    elements.diaries.removeChild(newElements.container);
+                });
+
+                // 要素を組み立てる
+                newElements.headline.appendChild(newElements.date);
+                newElements.headline.appendChild(newElements.deleteButton);
+                newElements.container.appendChild(newElements.headline);
+                newElements.container.appendChild(newElements.content);
+
+                // コンテナを返す
+                return newElements.container;
+            }
+
+            function appendDiary(content) {
+                const currentDate = generateCurrentDate();
+                const diary = createDiary(currentDate, content);
+                const diaryElement = createDiaryElement(diary);
+                elements.diaries.appendChild(diaryElement);
+            }
+
+            function parseDiaryElement(diaryElement) {
+                return {
+                    date: diaryElement.querySelector('.date').textContent,
+                    content: diaryElement.querySelector('.content').textContent,
+                };
+            }
+
+            function parseDiariesElement() {
+                const diaries = [];
+                for (const diaryElement of elements.diaries.children) {
+                    const diary = parseDiaryElement(diaryElement);
+                    diaries.push(diary);
+                }
+                return diaries;
+            }
+
+            function saveDiaries() {
+                const diaries = parseDiariesElement();
+                localStorage.setItem('diaries', JSON.stringify(diaries));
+            }
+
+            function loadDiaries() {
+                const diaries = JSON.parse(localStorage.getItem('diaries'));
+                if (diaries) {
+                    for (const diary of diaries) {
+                        const diaryElement = createDiaryElement(diary);
+                        elements.diaries.appendChild(diaryElement);
+                    }
+                }
+            }
+
+            elements.registerButton.addEventListener('click', () => {
+                const content = elements.contentInput.value;
+
+                if (content === '') {
+                  return;
+                }
+
+                appendDiary(content);
+                saveDiaries();
+
+                elements.contentInput.value = '';
+            });
+
+            loadDiaries();
+        </script>
+    </body>
+</html>
